@@ -4,8 +4,11 @@
 
 .photograph-header {
     background-color: #FAFAFA;
-    height: 300px;
     margin: 0 100px;
+}
+.photograph-header article img {
+    height: 200px;
+    width: 200px;
 }
 
 .contact_button {
@@ -73,4 +76,8 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+article img, article video{
+    width:200px;
 }
