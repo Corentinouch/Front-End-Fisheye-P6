@@ -78,6 +78,55 @@ form input {
     border-radius: 5px;
 }
 
-article img, article video{
-    width:200px;
+.photograph-work{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.photograph-work article{
+    margin: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.photograph-work article div{
+    width: 350px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.img-container{
+    width: 350px!important;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.img-container img, .img-container video{
+    scale: 1.8;
+    position: relative;
+    top: 35px;
+}
+.text-container{
+    justify-content: space-between!important;
+}
+.text-container p {
+    margin:5px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    
+}
+.photo_title {
+    color: #901c1c;
+    font-size: 20px!important;
+}
+@media(max-device-width:1024px){
+    .photograph-work{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media(max-device-width:768px){
+    .photograph-work{
+        grid-template-columns: repeat(1,1fr);
+    }
 }
