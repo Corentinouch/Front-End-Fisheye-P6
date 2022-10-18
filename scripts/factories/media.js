@@ -41,7 +41,7 @@ function mediaFactory(data, photographer) {
             const vdo = document.createElement("video");
 
             vdo.setAttribute("src", movie)
-            vdo.controls = true;
+            //vdo.controls = true;
 
             div.appendChild(vdo).setAttribute("alt", `${name} video`);
         }

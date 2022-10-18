@@ -47,6 +47,10 @@ async function displayMedia(medias, photographer) {
     medias.forEach((media) => {
         const mediaModel = mediaFactory(media, photographer);
         const getMedia = mediaModel.getMedia();
+       console.log(getMedia)
+        getMedia.addEventListener("click", e =>{
+            displayLightbox(e);
+        })
         main.appendChild(getMedia);
     })
 };
