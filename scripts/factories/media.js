@@ -45,9 +45,24 @@ function mediaFactory(data, photographer) {
 
             div.appendChild(vdo).setAttribute("alt", `${name} video`);
         }
-
         return (article);
+
+    }
+    function getGlobal() {
+        const globalprice = document.createElement('p');
+        const globallike = document.createElement('p');
+        const global = document.createElement('div');
+        console.log(likes)
+        //let addlike = 
+        globalprice.innerHTML = `${price} / jour`
+        globallike.innerHtml = ``
+        global.appendChild(globallike);
+        global.appendChild(globalprice);
+        article.appendChild(global);
+
+        return (article)
     }
 
-    return { id, photographerId, title, image, likes, date, price, getMedia }
+
+    return { id, photographerId, title, image, likes, date, price, getMedia, getGlobal }
 }

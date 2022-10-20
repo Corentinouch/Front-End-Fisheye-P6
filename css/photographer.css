@@ -1,19 +1,64 @@
 #contact_modal {
     display: none;
     position: fixed;
-    top: 10px;
-    left: 10px;
-    right:10px;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: #c4c4c466;
 }
-
+.test{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
 .photograph-header {
     background-color: #FAFAFA;
-    margin: 0 100px;
+    margin: 50px;
+    padding:20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
 }
 
 .photograph-header article img {
-    height: 200px;
+    transform: scale(1.5);
     width: 200px;
+}
+
+.header-photo {
+    grid-column: 3;
+    border-radius: 100%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+}
+
+.header-text {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.header-text h2 {
+    color: #D3573C;
+    font-size: 45px;
+    margin: 0px;
+}
+
+.header-text p {
+    margin: 0px;
+}
+
+.header-text .town {
+    color: #901C1C;
+    font-size: 24px;
 }
 
 .contact_button {
@@ -27,12 +72,20 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    grid-column: 2/3;
 }
 
 .modal {
-    border-radius: 5px;
     background-color: #DB8876;
-    padding: 35px;
+    padding: 50px;
+    margin: 5% auto;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    color: rgb(0, 0, 0);
+    padding-top: 15px;
 }
 
 .modal header {
@@ -46,6 +99,9 @@
 .modal header img {
     cursor: pointer;
     width: 10%;
+    position: relative;
+    top: 15px;
+    left: 25px;
 }
 
 .modal header h2 {
@@ -123,7 +179,7 @@ form input {
 
 .img-container img,
 .img-container video {
-    scale: 1.8;
+    scale: 2.2;
     position: relative;
     top: 35px;
 }
@@ -154,5 +210,40 @@ form input {
 @media(max-width:768px) {
     .photograph-work {
         grid-template-columns: repeat(1, 1fr) !important;
+    }
+
+    #contact_modal {
+        position: fixed;
+        bottom: 0;
+        height: unset;
+        width: 100%;
+        background-color: unset;
+    }
+
+    .modal {
+        max-width: unset;
+        margin: unset;
+        width: unset;
+    }
+
+    .photograph-header {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        text-align: center;
+    }
+
+    .header-text {
+        grid-column: 1;
+        grid-row: 1/2;
+    }
+
+    .header-photo {
+        grid-row: 3;
+        grid-column: 1;
+    }
+
+    .contact_button {
+        grid-column: 1;
+        grid-row: 2;
     }
 }

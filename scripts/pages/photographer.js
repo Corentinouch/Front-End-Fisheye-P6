@@ -20,12 +20,6 @@ async function getMedia() {
         .then(({ media }) => {
             const newMedia = media.filter((element) => element.photographerId === id)
             console.log(newMedia)
-            /*media.forEach(element => {
-               if (element.photographerId === id) {
-                console.log(element)
-                    return element
-                }
-            });*/
             console.log(media)
             return newMedia
         })
@@ -38,6 +32,8 @@ async function displayData(photographer) {
     const photographerModel = photographerFactory(photographer);
     const getHeader = photographerModel.getHeader();
     photographerSection.appendChild(getHeader);
+    const getPhotoHeader = photographerModel.getPhotoHeader();
+    photographerSection.appendChild(getPhotoHeader);
 };
 
 async function displayMedia(medias, photographer) {
@@ -47,8 +43,8 @@ async function displayMedia(medias, photographer) {
     medias.forEach((media) => {
         const mediaModel = mediaFactory(media, photographer);
         const getMedia = mediaModel.getMedia();
-       console.log(getMedia)
-        getMedia.addEventListener("click", e =>{
+        console.log(getMedia)
+        getMedia.addEventListener("click", e => {
             displayLightbox(e);
         })
         main.appendChild(getMedia);
