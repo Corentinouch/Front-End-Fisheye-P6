@@ -1,3 +1,7 @@
+import mediaFactory from "../factories/media.js";
+import photographerFactory from "../factories/photographer.js";
+import displayLightbox from "../utils/lightbox.js";
+
 const str = window.location.href;
 const url = new URL(str);
 const id = parseInt(url.searchParams.get("id"));
@@ -45,7 +49,7 @@ async function displayMedia(medias, photographer) {
         const getMedia = mediaModel.getMedia();
         console.log(getMedia)
         getMedia.addEventListener("click", e => {
-            displayLightbox(e);
+            displayLightbox(media, photographer, medias);
         })
         main.appendChild(getMedia);
     })

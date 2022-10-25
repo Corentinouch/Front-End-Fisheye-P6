@@ -1,3 +1,5 @@
+import nameExtract from "../helpers/nameExtract.js";
+
 function mediaFactory(data, photographer) {
     const { id, photographerId, title, image, video, likes, date } = data;
     const { name, price } = photographer;
@@ -11,10 +13,7 @@ function mediaFactory(data, photographer) {
         const divtext = document.createElement('div');
         const text = document.createElement('p');
         const like = document.createElement('p');
-
-        let prenom = name.split(" ")[0];
-        prenom = prenom.replace("-", " ")
-        console.log(prenom)
+        const prenom = nameExtract(name);
 
         text.innerHTML = `${title}`;
         text.setAttribute("class", "photo_title")
@@ -30,39 +29,18 @@ function mediaFactory(data, photographer) {
         if (data.image) {
             const picture = `assets/images/${prenom}/${image}`;
             const img = document.createElement('img');
-
             img.setAttribute("src", picture);
-
             div.appendChild(img).setAttribute("alt", `${name} pictures`);
-
-
         } else if (data.video) {
             const movie = `assets/images/${prenom}/${video}`;
             const vdo = document.createElement("video");
-
             vdo.setAttribute("src", movie)
-            //vdo.controls = true;
-
             div.appendChild(vdo).setAttribute("alt", `${name} video`);
         }
         return (article);
-
-    }
-    function getGlobal() {
-        const globalprice = document.createElement('p');
-        const globallike = document.createElement('p');
-        const global = document.createElement('div');
-        console.log(likes)
-        //let addlike = 
-        globalprice.innerHTML = `${price} / jour`
-        globallike.innerHtml = ``
-        global.appendChild(globallike);
-        global.appendChild(globalprice);
-        article.appendChild(global);
-
-        return (article)
     }
 
-
-    return { id, photographerId, title, image, likes, date, price, getMedia, getGlobal }
+    return { id, photographerId, title, image, likes, date, price, getMedia }
 }
+
+export default mediaFactory

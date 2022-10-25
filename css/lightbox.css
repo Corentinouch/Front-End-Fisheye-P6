@@ -15,7 +15,15 @@
     height: 100%;
     width:100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .lightbox img{
-    height:100%;
+    width:100%;
+    max-width: 400px;
+}
+.img_container video{
+    max-width: 100%;
 }
