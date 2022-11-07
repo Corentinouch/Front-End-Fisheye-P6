@@ -1,4 +1,4 @@
-function photographerFactory(data) {
+function photographerFactory(data, medias) {
     const { name, portrait, city, country, tagline, price, id } = data;
 
     const picture = `assets/photographers/${portrait}`
@@ -13,7 +13,6 @@ function photographerFactory(data) {
 
     //Autre data utilisé sur index et photographe
     const otherData = document.createElement('p')
-
 
     function getUserCardDOM() {
         const article = document.createElement('article')
@@ -47,14 +46,81 @@ function photographerFactory(data) {
 
         return (article)
     }
-    function getPhotoHeader(){
+    function getPhotoHeader() {
         const article = document.createElement('article')
         article.appendChild(img)
         article.classList.add("header-photo")
 
         return (article)
     }
-    return { name, picture, city, country, tagline, price, id, getUserCardDOM, getHeader, getPhotoHeader }
+
+    function getGlobal() {
+        let likes = 0
+        medias.forEach((media) => {
+            likes += media.likes
+        })
+        const div = document.createElement('div')
+        const pricetext = document.createElement('p')
+        const liketext = document.createElement('p')
+        liketext.setAttribute("class", "global_like")
+        div.classList.add("info_container")
+        liketext.innerHTML = `${likes} ❤️`
+        pricetext.innerHTML = `${price}€ / jour`
+        div.appendChild(liketext)
+        div.appendChild(pricetext)
+
+        console.log(liketext)
+        return (div);
+    }
+
+    function sortingMedia() {
+        const div = document.createElement('div')
+        const text_sort = document.createElement('p')
+        const div_sort = document.createElement('select')
+        const date_sort = document.createElement('option')
+        const pop_sort = document.createElement('option')
+        const abc_sort = document.createElement('option')
+        const default_sort = document.createElement('option')
+
+        div.classList.add('sort_container')
+        text_sort.textContent = "Trier par"
+        default_sort.setAttribute("value", "Default")
+        default_sort.textContent = "Default"
+        date_sort.setAttribute("value", "Date")
+        date_sort.textContent = "Date"
+        pop_sort.setAttribute("value", "Popularité")
+        pop_sort.textContent = "Popularité"
+        abc_sort.setAttribute("value", "Titre")
+        abc_sort.textContent = "Titre"
+        div_sort.appendChild(default_sort)
+        div_sort.appendChild(date_sort)
+        div_sort.appendChild(pop_sort)
+        div_sort.appendChild(abc_sort)
+        div_sort.setAttribute("name", "sorting")
+        div_sort.setAttribute("id", "sorting")
+
+        div.appendChild(text_sort)
+        div.appendChild(div_sort)
+        console.log(medias, "test")
+
+       /* div_sort.addEventListener("change", e => {
+            console.log(div_sort.value)
+            if (div_sort.value === "Date") {
+                sortByDate();
+            } else if (div_sort.value === "Popularité") {
+                sortByPopularity()
+            } else if (div_sort.value === "Titre") {
+                sortByName()
+            }
+            return
+        })*/
+
+        return (div)
+    }
+
+
+
+    return { name, picture, city, country, tagline, price, id, getUserCardDOM, getHeader, getPhotoHeader, getGlobal, sortingMedia }
 }
 
 export default photographerFactory

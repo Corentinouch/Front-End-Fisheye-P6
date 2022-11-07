@@ -10,20 +10,10 @@ function mediaFactory(data, photographer) {
 
         const article = document.createElement('article');
         const div = document.createElement('div');
-        const divtext = document.createElement('div');
-        const text = document.createElement('p');
-        const like = document.createElement('p');
         const prenom = nameExtract(name);
 
-        text.innerHTML = `${title}`;
-        text.setAttribute("class", "photo_title")
-        like.innerHTML = `${likes} ❤️`;
 
         div.setAttribute("class", 'img-container');
-        divtext.appendChild(text);
-        divtext.appendChild(like);
-        divtext.setAttribute("class", 'text-container')
-        article.appendChild(divtext);
         article.appendChild(div);
 
         if (data.image) {
@@ -39,8 +29,34 @@ function mediaFactory(data, photographer) {
         }
         return (article);
     }
+    function getTitle(){
+        const text = document.createElement('p');
+        const like = document.createElement('p');
+        const divtext = document.createElement('div');
+        const article = document.createElement('article');
 
-    return { id, photographerId, title, image, likes, date, price, getMedia }
+        divtext.appendChild(text);
+        divtext.appendChild(like);
+        divtext.setAttribute("class", 'text-container')
+        article.appendChild(divtext);
+        like.setAttribute("class", "like_button")
+        text.innerHTML = `${title}`;
+        text.setAttribute("class", "photo_title")
+
+        like.innerHTML = `${likes}` + '&nbsp' + '<i class="fa-regular fa-heart" ></i>'
+        like.addEventListener("click", e => {
+            const global = document.querySelector('.global_like')
+            console.log(global.textContent)
+            let globaltext = parseInt(global.textContent.split(" ")[0])
+            console.log(globaltext)
+            like.innerHTML = `${likes + 1}` + '&nbsp' + '<i class="fa-solid fa-heart"></i>'
+            global.innerHTML = `${globaltext + 1} ❤️`
+        })
+        return (article)
+    }
+    
+
+    return { id, photographerId, title, image, likes, date, price, getMedia, getTitle }
 }
 
 export default mediaFactory

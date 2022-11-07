@@ -1,107 +1,117 @@
 import nameExtract from "../helpers/nameExtract.js";
 
-function displayLightbox(media, photographer, medias) {
-    const { id, photographerId, title, image, video, likes, date } = media;
-    const { name, price } = photographer;
+function triggerLightbox(media, photographer, medias) {
+    const hasLightbox = document.querySelector(".lightbox");
 
-    const lightbox = document.querySelector(".lightbox");
-    const prenom = nameExtract(name);
-    const picture = `assets/images/${prenom}/${image}`
-    const movie = `assets/images/${prenom}/${video}`
-    if (!lightbox) {
-
-        const modal = document.createElement("div");
-        modal.classList.add("lightbox");
-
-        const previous = document.createElement("div");
-        const next = document.createElement("div");
-        const main = document.createElement("div");
-        const closeBtn = document.createElement("button");
-        const previousBtn = document.createElement("button");
-        const nextBtn = document.createElement("button");
-        nextBtn.classList.add("next_button");
-        previousBtn.classList.add("previous_button")
-
-        if (media.image) {
-            const picture = `assets/images/${prenom}/${image}`;
-            const img = document.createElement('img');
-            img.setAttribute("src", picture);
-            main.appendChild(img).setAttribute("alt", `${name} pictures`);
-
-        } else if (media.video) {
-            const movie = `assets/images/${prenom}/${video}`;
-            const vdo = document.createElement("video");
-            vdo.setAttribute("src", movie)
-            vdo.controls = true;
-            main.appendChild(vdo).setAttribute("alt", `${name} video`);
-        }
-
-        closeBtn.classList.add("close_modal");
-        closeBtn.textContent = "close"
-
-        previous.appendChild(previousBtn);
-        main.classList.add("img_container");
-        next.appendChild(closeBtn);
-        next.appendChild(nextBtn);
-        modal.appendChild(previous);
-        modal.appendChild(main);
-        modal.appendChild(next);
-
-        document.body.appendChild(modal);
-
-        closeBtn.addEventListener("click", e => {
-            modal.style.display = "none";
-        })
-
-    } else {
-        const modal = lightbox;
-        modal.style.display = "flex";
-        const img = document.querySelector(".img_container img")
-        img.setAttribute("src", picture);
-        //const vdo = document.querySelector("img_container video")
-        //vdo.setAttribute("src", movie);
+    if(hasLightbox) {
+        closeLightbox()
     }
 
+    displayLightbox();
+
     let currentMediaIndex = medias.findIndex(element => element.id === media.id)
-    console.log(currentMediaIndex);
+
+    setImgOrVideo(medias, currentMediaIndex, photographer.name);
 
     const nextBtn = document.querySelector(".next_button")
     const previousBtn = document.querySelector(".previous_button")
     nextBtn.addEventListener("click", () => {
-        let nextIndex = currentMediaIndex + 1;
+        const nextIndex = currentMediaIndex + 1;
         let nextPicture = medias[nextIndex];
         if (!nextPicture) {
-
-            return;
+            console.log(nextPicture, "expect undefined")
+            nextPicture = medias[0]
+            console.log(nextPicture, 'expect picture 0')
+            return nextPicture;
         }
 
         currentMediaIndex = nextIndex;
 
-        const prenom = nameExtract(name);
-        const picture = `assets/images/${prenom}/${nextPicture.image}`
-
-        const img = document.querySelector(".img_container img")
-        img.setAttribute("src", picture);
+        setImgOrVideo(medias, currentMediaIndex, photographer.name);
     })
 
     previousBtn.addEventListener("click", () => {
         const previousIndex = currentMediaIndex - 1;
         let previousPicture = medias[previousIndex];
         if (!previousPicture) {
-
-            return;
+            console.log(previousPicture, "expect undefined")
+            previousPicture = medias[0]
+            console.log(previousPicture, 'expect picture 0')
+            return previousPicture;
         }
 
         currentMediaIndex = previousIndex;
 
-        const prenom = nameExtract(name);
-        const picture = `assets/images/${prenom}/${previousPicture.image}`
-
-        const img = document.querySelector(".img_container img")
-        img.setAttribute("src", picture);
+        setImgOrVideo(medias, currentMediaIndex, photographer.name);
     })
-
-
 }
 
-export default displayLightbox
+function closeLightbox() {
+    const lightbox = document.querySelector(".lightbox");
+    lightbox.remove();
+}
+
+function displayLightbox() {
+        const modal = document.createElement("div");
+        modal.classList.add("lightbox");
+
+        const previous = document.createElement("div");
+        previous.setAttribute("class","previous")
+        const next = document.createElement("div");
+        next.setAttribute("class","next")
+        const main = document.createElement("div");
+        const text_title = document.createElement("p");
+        text_title.classList.add("title")
+
+        const closeBtn = document.createElement("button");
+        const previousBtn = document.createElement("button");
+        const nextBtn = document.createElement("button");
+
+        nextBtn.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`
+        nextBtn.classList.add("next_button");
+        previousBtn.classList.add("previous_button")
+        previousBtn.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`
+
+        
+
+        closeBtn.classList.add("close_modal");
+        closeBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
+        closeBtn.addEventListener("click", closeLightbox)
+
+        main.classList.add("img_container");
+        previous.appendChild(previousBtn);
+        next.appendChild(nextBtn);
+        modal.appendChild(closeBtn);
+        modal.appendChild(previous);
+        modal.appendChild(main);
+        modal.appendChild(next);
+        modal.appendChild(text_title)
+        document.body.appendChild(modal);
+}
+
+function setImgOrVideo(medias, currIndex, name) {
+
+    const main = document.querySelector('.img_container')
+    main.innerHTML = '';
+
+    const prenom = nameExtract(name);
+    
+    const currMedia = medias[currIndex];
+
+    if (currMedia.image) {
+        const picture = `assets/images/${prenom}/${currMedia.image}`
+        const img = document.createElement('img');
+        img.setAttribute("src", picture);
+        main.appendChild(img).setAttribute("alt", `${name} pictures`);
+    } else if (currMedia.video) {
+        const movie = `assets/images/${prenom}/${currMedia.video}`
+        const vdo = document.createElement("video");
+        vdo.setAttribute("src", movie)
+        vdo.controls = true;
+        main.appendChild(vdo).setAttribute("alt", `${name} video`);
+    }
+    const text_title = document.querySelector('.title')
+    text_title.innerHTML = `${currMedia.title}`
+}
+
+export default triggerLightbox

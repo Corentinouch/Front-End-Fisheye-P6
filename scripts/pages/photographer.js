@@ -1,6 +1,7 @@
 import mediaFactory from "../factories/media.js";
 import photographerFactory from "../factories/photographer.js";
-import displayLightbox from "../utils/lightbox.js";
+import triggerLightbox from "../utils/lightbox.js";
+import { sortByDate, sortByName, sortByPopularity } from "../helpers/sort.js";
 
 const str = window.location.href;
 const url = new URL(str);
@@ -30,37 +31,63 @@ async function getMedia() {
 }
 
 
-async function displayData(photographer) {
+async function displayData(photographer, media) {
     const photographerSection = document.querySelector(".photograph-header");
+    const photographerFooter = document.querySelector(".photograph-footer");
+    const photographerSort = document.querySelector(".photograph-sort");
+    const photographerModel = photographerFactory(photographer, media);
 
-    const photographerModel = photographerFactory(photographer);
     const getHeader = photographerModel.getHeader();
     photographerSection.appendChild(getHeader);
+
     const getPhotoHeader = photographerModel.getPhotoHeader();
     photographerSection.appendChild(getPhotoHeader);
+
+    const getGlobal = photographerModel.getGlobal();
+    photographerFooter.appendChild(getGlobal);
+
+    const sortingMedia = photographerModel.sortingMedia();
+    photographerSort.appendChild(sortingMedia)
+
 };
 
 async function displayMedia(medias, photographer) {
     const main = document.querySelector(".photograph-work");
-    console.log(main)
+    // cleanup gallery before adding elements
+    main.innerHTML = "";
 
     medias.forEach((media) => {
         const mediaModel = mediaFactory(media, photographer);
         const getMedia = mediaModel.getMedia();
-        console.log(getMedia)
-        getMedia.addEventListener("click", e => {
-            displayLightbox(media, photographer, medias);
+        const getTitle = mediaModel.getTitle();
+        console.log(getMedia, "getmedia")
+        getMedia.addEventListener("click", () => {
+            triggerLightbox(media, photographer, medias);
         })
         main.appendChild(getMedia);
+        main.appendChild(getTitle);
     })
 };
 
 async function init() {
-    // Récupère les datas du photographe
     const photographer = await getPhotographer();
     const media = await getMedia();
-    displayData(photographer);
+    displayData(photographer, media);
     displayMedia(media, photographer);
+    const select = document.getElementById("sorting")
+
+    select.addEventListener("change", () => {
+        let medias = media
+            if (select.value === "Date") {
+                medias = sortByDate(media);
+            } else if (select.value === "Popularité") {
+                medias = sortByPopularity(media)
+            } else if (select.value === "Titre") {
+                medias =sortByName(media)
+            }
+            displayMedia(medias, photographer);
+            return
+    })
 };
 
 init();
