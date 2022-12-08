@@ -21,7 +21,6 @@ function mediaFactory(data, photographer) {
     const div = document.createElement('div');
     const prenom = nameExtract(name);
 
-
     div.setAttribute('class', 'img-container');
     div.setAttribute('tabindex', 0);
     article.appendChild(div);
@@ -40,7 +39,6 @@ function mediaFactory(data, photographer) {
     const text = document.createElement('p');
     const like = document.createElement('p');
     const divtext = document.createElement('div');
-
 
     divtext.appendChild(text);
     divtext.appendChild(like);
@@ -73,6 +71,7 @@ function mediaFactory(data, photographer) {
         global.innerHTML = `${globaltext - 1} ❤️`;
       }
     }
+
     like.addEventListener('click', (e) => {
       likePost()
     });
@@ -82,6 +81,7 @@ function mediaFactory(data, photographer) {
         likePost()
       }
     });
+
     return (article);
   }
 

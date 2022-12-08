@@ -128,10 +128,6 @@ function displayLightbox() {
   closeBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
   closeBtn.addEventListener('click', closeLightbox);
 
-  modal.addEventListener('keydown', function(event) {
-
-  });
-
   main.classList.add('img_container');
   previous.appendChild(previousBtn);
   next.appendChild(nextBtn);
