@@ -6,11 +6,11 @@ import nameExtract from '../helpers/nameExtract.js';
  * @return {*} id, photographerId, title, image, likes, date, price, getMedia
  */
 function mediaFactory(data, photographer) {
-  const {id, photographerId, title, image, video, likes, date} = data;
-  const {name, price} = photographer;
+  const { id, photographerId, title, image, video, likes, date } = data;
+  const { name, price } = photographer;
 
   /**
- *
+ * Création de l'article du média photo ou vidéo + titre + like
  * @return {HTMLElement} article
  */
   function getMedia() {
@@ -52,33 +52,49 @@ function mediaFactory(data, photographer) {
     text.setAttribute('class', 'photo_title');
 
     like.innerHTML = `${likes}` +
-    '&nbsp' +
-    '<i class="fa-regular fa-heart" tabindex="0"></i>';
+      '&nbsp' +
+      '<i class="fa-regular fa-heart" tabindex="0"></i>';
 
 
     like.addEventListener('click', (e) => {
       const icon = like.querySelector('i');
       const global = document.querySelector('.global_like');
-      console.log(global.textContent);
       const globaltext = parseInt(global.textContent.split(' ')[0]);
-      console.log(globaltext);
-      console.log(icon);
       if (icon.classList.contains('fa-regular')) {
         like.innerHTML = `${likes + 1}` +
-        '&nbsp' +
-        '<i class="fa-solid fa-heart"></i>';
+          '&nbsp' +
+          '<i class="fa-solid fa-heart" tabindex="0"></i>';
         global.innerHTML = `${globaltext + 1} ❤️`;
       } else {
         like.innerHTML = `${likes}` +
-        '&nbsp' +
-        '<i class="fa-regular fa-heart"></i>';
+          '&nbsp' +
+          '<i class="fa-regular fa-heart" tabindex="0"></i>';
         global.innerHTML = `${globaltext - 1} ❤️`;
+      }
+    });
+
+    like.addEventListener('keydown', function (event) {
+      if (event.code == 'Enter') {
+        const icon = like.querySelector('i');
+        const global = document.querySelector('.global_like');
+        const globaltext = parseInt(global.textContent.split(' ')[0]);
+        if (icon.classList.contains('fa-regular')) {
+          like.innerHTML = `${likes + 1}` +
+            '&nbsp' +
+            '<i class="fa-solid fa-heart" tabindex="0"></i>';
+          global.innerHTML = `${globaltext + 1} ❤️`;
+        } else {
+          like.innerHTML = `${likes}` +
+            '&nbsp' +
+            '<i class="fa-regular fa-heart" tabindex="0"></i>';
+          global.innerHTML = `${globaltext - 1} ❤️`;
+        }
       }
     });
     return (article);
   }
 
-  return {id, photographerId, title, image, likes, date, price, getMedia};
+  return { id, photographerId, title, image, likes, date, price, getMedia };
 }
 
 export default mediaFactory;

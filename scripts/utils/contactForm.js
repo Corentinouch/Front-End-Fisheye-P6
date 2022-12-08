@@ -1,21 +1,30 @@
+/**
+ *Affichage de la modale contact
+ */
 function displayModal() {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'block';
 }
 
+/**
+ *Fermeture de la modale contact
+ */
 function closeModal() {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'none';
 }
 
 const close = document.getElementById('modal_cross');
-console.log(close);
 close.addEventListener('keydown', function(event) {
   if (event.code == 'Enter') {
     closeModal();
   }
 });
 
+/**
+ *Envois de la modale contact
+ * @param {*} event
+ */
 function sendModal(event) {
   const prenom = document.getElementById('prenom');
   const nom = document.getElementById('nom');

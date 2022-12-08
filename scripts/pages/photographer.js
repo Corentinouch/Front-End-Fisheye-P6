@@ -8,28 +8,37 @@ const url = new URL(str);
 const id = parseInt(url.searchParams.get('id'));
 const dataUrl = './data/photographers.json';
 
+/**
+ * Retourner un photographe grâce à un id spécifique
+ * @return {photographer}
+ */
 async function getPhotographer() {
   return await fetch(dataUrl)
       .then((response) => response.json())
       .then(({photographers}) => {
         const photographer = photographers.find((element) => element.id === id);
-        console.log(photographer);
         return photographer;
       });
 }
+/**
+ * Retourner tous les médias correspondant à l'id du photographe
+ * @return {newMedia}
+ */
 async function getMedia() {
   return await fetch(dataUrl)
       .then((response) => response.json())
       .then(({media}) => {
         const newMedia =
         media.filter((element) => element.photographerId === id);
-        console.log(newMedia);
-        console.log(media);
         return newMedia;
       });
 }
 
-
+/**
+ * Affichage des elements de la page de chaque photographe
+ * @param {*} photographer
+ * @param {*} media
+ */
 async function displayData(photographer, media) {
   const photographerSection = document.querySelector('.photograph-header');
   const photographerFooter = document.querySelector('.photograph-footer');
@@ -49,6 +58,11 @@ async function displayData(photographer, media) {
   photographerSort.appendChild(sortingMedia);
 };
 
+/**
+ * Affichage des medias de la page du photographe
+ * @param {*} medias
+ * @param {*} photographer
+ */
 async function displayMedia(medias, photographer) {
   const main = document.querySelector('.photograph-work');
   // cleanup gallery before adding elements
@@ -57,8 +71,6 @@ async function displayMedia(medias, photographer) {
   medias.forEach((media) => {
     const mediaModel = mediaFactory(media, photographer);
     const getMedia = mediaModel.getMedia();
-    // const getTitle = mediaModel.getTitle();
-    console.log(getMedia, 'getmedia');
     const imgContainer = getMedia.querySelector('.img-container');
     imgContainer.addEventListener('click', () => {
       triggerLightbox(media, photographer, medias);
@@ -67,13 +79,15 @@ async function displayMedia(medias, photographer) {
       if (event.code == 'Enter') {
         triggerLightbox(media, photographer, medias);
       }
-      console.log(event.code);
     });
     main.appendChild(getMedia);
-    // main.appendChild(getTitle);
   });
 };
 
+/**
+ * Initialisation
+ * @return {*}
+ */
 async function init() {
   const photographer = await getPhotographer();
   const media = await getMedia();

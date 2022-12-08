@@ -1,4 +1,8 @@
 import photographerFactory from '../factories/photographer.js';
+/**
+ * Récupération de tous les photographes
+ * @return {photographers} 
+ */
 async function getPhotographers() {
   const url = './data/photographers.json';
 
@@ -9,7 +13,10 @@ async function getPhotographers() {
       });
 }
 
-
+/**
+ * Affichage des Photographes
+ * @param {*} photographers
+ */
 async function displayData(photographers) {
   const photographersSection = document.querySelector('.photographer_section');
 
@@ -20,6 +27,10 @@ async function displayData(photographers) {
   });
 };
 
+/**
+ * Initalisation de l'affichage des photographes
+ * @return {*} 
+ */
 async function init() {
   const photographers = await getPhotographers();
   displayData(photographers);

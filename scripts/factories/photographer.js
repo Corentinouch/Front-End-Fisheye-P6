@@ -1,3 +1,9 @@
+/**
+ *
+ * @param {*} data
+ * @param {*} medias
+ * @return {*} all data
+ */
 function photographerFactory(data, medias) {
   const {name, portrait, city, country, tagline, price, id} = data;
 
@@ -14,6 +20,10 @@ function photographerFactory(data, medias) {
   // Autre data utilisé sur index et photographe
   const otherData = document.createElement('p');
 
+  /**
+ * Création de l'article de la carte photographe sur index
+ * @return {HTMLElement} article
+ */
   function getUserCardDOM() {
     const article = document.createElement('article');
     const link = document.createElement('a');
@@ -31,7 +41,10 @@ function photographerFactory(data, medias) {
 
     return (article);
   }
-
+  /**
+ * Création du header sur la page du photographe
+ * @return {HTMLElement} article
+ */
   function getHeader() {
     const article = document.createElement('article');
     const div = document.createElement('div');
@@ -49,6 +62,10 @@ function photographerFactory(data, medias) {
 
     return (article);
   }
+  /**
+ * Création de la photo sur la page photographe
+ * @return {HTMLElement} article
+ */
   function getPhotoHeader() {
     const article = document.createElement('article');
     article.appendChild(img);
@@ -57,6 +74,10 @@ function photographerFactory(data, medias) {
     return (article);
   }
 
+  /**
+ * Créatio du footer de la page photographe infos globale
+ * @return {HTMLElement} div
+ */
   function getGlobal() {
     let likes = 0;
     medias.forEach((media) => {
@@ -73,11 +94,13 @@ function photographerFactory(data, medias) {
     pricetext.innerHTML = `${price}€ / jour`;
     div.appendChild(liketext);
     div.appendChild(pricetext);
-
-    console.log(liketext);
     return (div);
   }
 
+  /**
+ * Création du tri des medias sur la page photographe
+ * @return {HTMLElement} div
+ */
   function sortingMedia() {
     const div = document.createElement('div');
     const divContainer = document.createElement('div');
@@ -86,14 +109,10 @@ function photographerFactory(data, medias) {
     const dateSort = document.createElement('option');
     const popSort = document.createElement('option');
     const abcSort = document.createElement('option');
-    const defaultSort = document.createElement('option');
 
     div.classList.add('sort_container');
     divContainer.classList.add('sorting');
     textSort.textContent = 'Trier par';
-    defaultSort.setAttribute('value', 'Default');
-    defaultSort.setAttribute('tabindex', 0);
-    defaultSort.textContent = 'Default';
     dateSort.setAttribute('value', 'Date');
     dateSort.setAttribute('tabindex', 0);
     dateSort.textContent = 'Date';
@@ -103,7 +122,6 @@ function photographerFactory(data, medias) {
     abcSort.setAttribute('value', 'Titre');
     abcSort.setAttribute('tabindex', 0);
     abcSort.textContent = 'Titre';
-    divSort.appendChild(defaultSort);
     divSort.appendChild(dateSort);
     divSort.appendChild(popSort);
     divSort.appendChild(abcSort);
@@ -113,8 +131,6 @@ function photographerFactory(data, medias) {
     divContainer.appendChild(textSort);
     divContainer.appendChild(divSort);
     div.appendChild(divContainer);
-    console.log(medias, 'test');
-
     return (div);
   }
 

@@ -1,3 +1,8 @@
+/**
+ *Tri par Date
+ * @param {*} medias
+ * @return {medias} Liste des medias
+ */
 export function sortByDate(medias) {
   medias = medias.sort((a, b) => {
     const dateA = new Date(a.date);
@@ -9,14 +14,24 @@ export function sortByDate(medias) {
     }
     return 0;
   });
-  console.log(medias);
   return medias;
 }
+
+/**
+ *Tri par Popularité
+ * @param {*} medias
+ * @return {medias} Liste des medias
+ */
 export function sortByPopularity(medias) {
   medias.sort((a, b) => b.likes - a.likes);
-  console.log(medias);
   return medias;
 }
+
+/**
+ * Tri par ordre alphabetique
+ * @param {*} medias
+ * @return {medias} Liste des medias
+ */
 export function sortByName(medias) {
   medias.sort((a, b) => {
     const nameA = a.title.toLowerCase();
@@ -28,6 +43,5 @@ export function sortByName(medias) {
     }
     return 0;
   });
-  console.log(medias);
   return medias;
 }

@@ -1,5 +1,11 @@
 import nameExtract from '../helpers/nameExtract.js';
 
+/**
+ * Utilisation de la lightbox
+ * @param {*} media
+ * @param {*} photographer
+ * @param {*} medias
+ */
 function triggerLightbox(media, photographer, medias) {
   const hasLightbox = document.querySelector('.lightbox');
 
@@ -82,11 +88,17 @@ function triggerLightbox(media, photographer, medias) {
   });
 }
 
+/**
+ * Fermeture de la lightbox
+ */
 function closeLightbox() {
   const lightbox = document.querySelector('.lightbox');
   lightbox.remove();
 }
 
+/**
+ * Création des éléments de la lightbox
+ */
 function displayLightbox() {
   const modal = document.createElement('div');
   modal.classList.add('lightbox');
@@ -131,6 +143,12 @@ function displayLightbox() {
   document.body.appendChild(modal);
 }
 
+/**
+ * Mise à jour au changement de média (image ou vidéo)
+ * @param {*} medias
+ * @param {*} currIndex
+ * @param {*} name
+ */
 function setImgOrVideo(medias, currIndex, name) {
   const main = document.querySelector('.img_container');
   main.innerHTML = '';
