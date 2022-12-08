@@ -54,9 +54,10 @@ function mediaFactory(data, photographer) {
     like.innerHTML = `${likes}` +
       '&nbsp' +
       '<i class="fa-regular fa-heart" tabindex="0"></i>';
-
-
-    like.addEventListener('click', (e) => {
+/**
+ * Like et displike d'un media
+ */
+    function likePost() {
       const icon = like.querySelector('i');
       const global = document.querySelector('.global_like');
       const globaltext = parseInt(global.textContent.split(' ')[0]);
@@ -71,24 +72,14 @@ function mediaFactory(data, photographer) {
           '<i class="fa-regular fa-heart" tabindex="0"></i>';
         global.innerHTML = `${globaltext - 1} ❤️`;
       }
+    }
+    like.addEventListener('click', (e) => {
+      likePost()
     });
 
     like.addEventListener('keydown', function (event) {
       if (event.code == 'Enter') {
-        const icon = like.querySelector('i');
-        const global = document.querySelector('.global_like');
-        const globaltext = parseInt(global.textContent.split(' ')[0]);
-        if (icon.classList.contains('fa-regular')) {
-          like.innerHTML = `${likes + 1}` +
-            '&nbsp' +
-            '<i class="fa-solid fa-heart" tabindex="0"></i>';
-          global.innerHTML = `${globaltext + 1} ❤️`;
-        } else {
-          like.innerHTML = `${likes}` +
-            '&nbsp' +
-            '<i class="fa-regular fa-heart" tabindex="0"></i>';
-          global.innerHTML = `${globaltext - 1} ❤️`;
-        }
+        likePost()
       }
     });
     return (article);
