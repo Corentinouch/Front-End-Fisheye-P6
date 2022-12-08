@@ -5,6 +5,10 @@ function displayModal() {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'block';
 }
+const contactButton = document.getElementById('contactButton');
+contactButton.addEventListener('click', (event) =>{
+  displayModal();
+});
 
 /**
  *Fermeture de la modale contact
@@ -37,3 +41,7 @@ function sendModal(event) {
 
     event.preventDefault();
 }
+const sendM = document.getElementById('sendModal');
+sendM.addEventListener('click', (event) =>{
+  sendModal(event);
+});

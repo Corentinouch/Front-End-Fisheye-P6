@@ -6,8 +6,8 @@ import nameExtract from '../helpers/nameExtract.js';
  * @return {*} id, photographerId, title, image, likes, date, price, getMedia
  */
 function mediaFactory(data, photographer) {
-  const { id, photographerId, title, image, video, likes, date } = data;
-  const { name, price } = photographer;
+  const {id, photographerId, title, image, video, likes, date} = data;
+  const {name, price} = photographer;
 
   /**
  * Création de l'article du média photo ou vidéo + titre + like
@@ -52,7 +52,7 @@ function mediaFactory(data, photographer) {
     like.innerHTML = `${likes}` +
       '&nbsp' +
       '<i class="fa-regular fa-heart" tabindex="0"></i>';
-/**
+    /**
  * Like et displike d'un media
  */
     function likePost() {
@@ -73,19 +73,19 @@ function mediaFactory(data, photographer) {
     }
 
     like.addEventListener('click', (e) => {
-      likePost()
+      likePost();
     });
 
-    like.addEventListener('keydown', function (event) {
+    like.addEventListener('keydown', function(event) {
       if (event.code == 'Enter') {
-        likePost()
+        likePost();
       }
     });
 
     return (article);
   }
 
-  return { id, photographerId, title, image, likes, date, price, getMedia };
+  return {id, photographerId, title, image, likes, date, price, getMedia};
 }
 
 export default mediaFactory;
