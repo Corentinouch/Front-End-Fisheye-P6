@@ -83,7 +83,11 @@
     grid-column: 2/3;
     transition: all 300ms;
 }
-
+#sendModal:hover{
+background:#901C1C;
+color:white;
+transform: scale(1.05);
+}
 .contact_button:hover{
     background: #DB8876;
     color:black;
@@ -206,7 +210,7 @@ form input {
 }
 
 .img-container:focus {
-    border: 10px solid red;
+    border: 5px solid #901C1C;
 }
 
 .text-container {
