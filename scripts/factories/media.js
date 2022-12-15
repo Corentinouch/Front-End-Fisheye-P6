@@ -29,12 +29,12 @@ function mediaFactory(data, photographer) {
       const picture = `assets/images/${prenom}/${image}`;
       const img = document.createElement('img');
       img.setAttribute('src', picture);
-      div.appendChild(img).setAttribute('alt', `${name} ${image} pictures`);
+      div.appendChild(img).setAttribute('alt', `${name} pictures`);
     } else if (data.video) {
       const movie = `assets/images/${prenom}/${video}`;
       const vdo = document.createElement('video');
       vdo.setAttribute('src', movie);
-      div.appendChild(vdo).setAttribute('title', `${name} ${video}`);
+      div.appendChild(vdo).setAttribute('title', `${name} video`);
     }
     const text = document.createElement('p');
     const like = document.createElement('p');
@@ -51,7 +51,7 @@ function mediaFactory(data, photographer) {
 
     like.innerHTML = `${likes}` +
       '&nbsp' +
-      '<i class="fa-regular fa-heart" tabindex="0"></i>';
+      '<i class="fa-regular fa-heart"></i>';
     /**
  * Like et displike d'un media
  */
@@ -62,12 +62,12 @@ function mediaFactory(data, photographer) {
       if (icon.classList.contains('fa-regular')) {
         like.innerHTML = `${likes + 1}` +
           '&nbsp' +
-          '<i class="fa-solid fa-heart" tabindex="0"></i>';
+          '<i class="fa-solid fa-heart"></i>';
         global.innerHTML = `${globaltext + 1} ❤️`;
       } else {
         like.innerHTML = `${likes}` +
           '&nbsp' +
-          '<i class="fa-regular fa-heart" tabindex="0"></i>';
+          '<i class="fa-regular fa-heart"></i>';
         global.innerHTML = `${globaltext - 1} ❤️`;
       }
     }
@@ -76,11 +76,11 @@ function mediaFactory(data, photographer) {
       likePost();
     });
 
-    like.addEventListener('keydown', function(event) {
+    /*like.addEventListener('keydown', function(event) {
       if (event.code == 'Enter') {
         likePost();
       }
-    });
+    });*/
 
     return (article);
   }

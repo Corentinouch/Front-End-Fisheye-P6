@@ -164,6 +164,9 @@ form input {
     border: none;
     border-radius: 5px;
 }
+form p{
+    color:rgb(112, 0, 0);
+}
 
 #texte {
     height: 100px;

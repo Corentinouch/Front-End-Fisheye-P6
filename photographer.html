@@ -24,7 +24,7 @@
     <div class="photograph-footer"></div>
   </main>
   <div id="contact_modal">
-    <div class="modal">
+    <div id="modal_block" class="modal">
       <header>
         <h2 class="modal_title">Contactez-moi</h2>
         <img id='modal_cross' tabindex="0" src="assets/icons/close.svg" alt="bouton fermeture contact" onclick="closeModal()" />
@@ -33,12 +33,16 @@
         <div>
           <label for="prenom">Prénom</label>
           <input type="text" id="prenom" name="prenom" />
+          <p id="errorprenom"></p>
           <label for="nom">Nom</label>
           <input type="text" id="nom" name="nom" />
+          <p id="errornom"></p>
           <label for="mail">Email</label>
           <input type="email" id="mail" name="mail" />
+          <p id="errormail"></p>
           <label for="texte">Votre message</label>
           <input type="text-area" id="texte" name="texte" />
+          <p id="errormsg"></p>
         </div>
         <button id="sendModal" class="contact_button sending">Envoyer</button>
       </form>

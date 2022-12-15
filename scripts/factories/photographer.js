@@ -75,7 +75,7 @@ function photographerFactory(data, medias) {
   }
 
   /**
- * Créatio du footer de la page photographe infos globale
+ * Création du footer de la page photographe infos globale
  * @return {HTMLElement} div
  */
   function getGlobal() {
